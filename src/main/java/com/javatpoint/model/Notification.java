@@ -1,14 +1,12 @@
 package com.javatpoint.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class Notification {
     @Id
+    @GeneratedValue
     @Column
     private int id;
     @Column
@@ -16,8 +14,12 @@ public class Notification {
     @Column
     private String Content;
 
+    public Notification() {
+        this.Subject = null;
+        this.Content = null;
+    }
 
-    public Notification(Template template){
+    public Notification(Template template) {
         this.Subject = template.getSubject();
         this.Content = template.getContent();
     }

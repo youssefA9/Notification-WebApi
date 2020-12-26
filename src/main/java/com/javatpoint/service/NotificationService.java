@@ -15,7 +15,7 @@ public class NotificationService {
     @Autowired
     NotificationsRepository NotifRepository;
 
-    public List<Notification> getAll(){
+    public List<Notification> getAllNotifications() {
         List<Notification> Notifications = new ArrayList<Notification>();
         NotifRepository.findAll().forEach(temp -> Notifications.add(temp));
         return Notifications;
