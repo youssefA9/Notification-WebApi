@@ -13,7 +13,6 @@ import com.javatpoint.repository.TemplatesRepository;
 public class TemplateService {
     @Autowired
     TemplatesRepository TemplatesRepository;
-    List<Template> temps;
 
     public List<Template> getAllTemplates() {
         List<Template> Templates = new ArrayList<Template>();
