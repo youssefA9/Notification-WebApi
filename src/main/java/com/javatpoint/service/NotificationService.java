@@ -16,6 +16,7 @@ public class NotificationService {
     NotificationsRepository NotifRepository;
     SMSRepository sms;
     EmailRepository email;
+
     public List<Notification> getAllNotifications() {
         List<Notification> Notifications = new ArrayList<Notification>();
         NotifRepository.findAll().forEach(temp -> Notifications.add(temp));
@@ -24,9 +25,11 @@ public class NotificationService {
 
     public void addNotification(Notification Notif) {
         //sms is true
-        if(Notif.getChannel()){ sms.save(Notif); }
-
-        else{email.save(Notif);}
+        if (Notif.getChannel()) {
+            sms.save(Notif);
+        } else {
+            email.save(Notif);
+        }
 
 
         NotifRepository.save(Notif);

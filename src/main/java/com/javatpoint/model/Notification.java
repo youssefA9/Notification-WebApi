@@ -45,7 +45,9 @@ public class Notification {
         Content = content;
     }
 
-    public void setChannel(boolean Channel) { channel = Channel; }
+    public void setChannel(boolean Channel) {
+        channel = Channel;
+    }
 
     public String getContent() {
         return Content;
