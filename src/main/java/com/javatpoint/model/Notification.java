@@ -13,15 +13,19 @@ public class Notification {
     private String Subject;
     @Column
     private String Content;
+    @Column
+    private boolean channel; //sms is true;
 
     public Notification() {
         this.Subject = null;
         this.Content = null;
+        this.channel = false;
     }
 
     public Notification(Template template) {
         this.Subject = template.getSubject();
         this.Content = template.getContent();
+
     }
 
 
@@ -41,12 +45,18 @@ public class Notification {
         Content = content;
     }
 
+    public void setChannel(boolean Channel) { channel = Channel; }
+
     public String getContent() {
         return Content;
     }
 
     public String getSubject() {
         return Subject;
+    }
+
+    public boolean getChannel() {
+        return channel;
     }
 
 }
