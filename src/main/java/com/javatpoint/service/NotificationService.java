@@ -1,6 +1,8 @@
 package com.javatpoint.service;
 
+import com.javatpoint.model.Email;
 import com.javatpoint.model.Notification;
+import com.javatpoint.model.SMS;
 import com.javatpoint.model.Template;
 import com.javatpoint.repository.EmailRepository;
 import com.javatpoint.repository.NotificationsRepository;
@@ -28,22 +30,30 @@ public class NotificationService {
         return Notifications;
     }
 
-    public void addSMS(Notification x) {
-        smsRepository.save(x);
+    public String addSMS(Notification Notif) {
+        SMS temp = new SMS();
+        temp.setSubject(Notif.getSubject());
+        temp.setContent(Notif.getContent());
+        smsRepository.save(temp);
+        return "SMS Notification Has been added to queue";
     }
 
-    public void addEmail(Notification y) {
-        emailRepository.save(y);
+    public String addEmail(Notification Notif) {
+        Email temp = new Email();
+        temp.setSubject(Notif.getSubject());
+        temp.setContent(Notif.getContent());
+        emailRepository.save(temp);
+        return "Email Notification Has been added to queue";
     }
 
-    public void addNotification(Notification Notif) {
-        if (Notif.getChannel().equalsIgnoreCase("sms")) {
-            addSMS(Notif);
-        } else if (Notif.getChannel().equalsIgnoreCase("email")) {
-            addEmail(Notif);
-        }
+    public String addNotification(Notification Notif) {
         NotifRepository.save(Notif);
-
+        if (Notif.getChannel().equalsIgnoreCase("sms")) {
+            return "Notification Has Been Constructed" + "\n" + addSMS(Notif);
+        } else if (Notif.getChannel().equalsIgnoreCase("email")) {
+            return "Notification Has Been Constructed" + "\n" + addEmail(Notif);
+        } else {
+            return "Notification Has been Constructed But hadn't been add to any queue";
+        }
     }
-
 }

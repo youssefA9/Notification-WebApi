@@ -1,8 +1,7 @@
 package com.javatpoint.repository;
 
-import com.javatpoint.model.Notification;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.javatpoint.model.SMS;
 import org.springframework.data.repository.CrudRepository;
 
-public interface SMSRepository extends CrudRepository<Notification, Integer> {
+public interface SMSRepository extends CrudRepository<SMS, Integer> {
 }

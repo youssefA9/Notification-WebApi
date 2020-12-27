@@ -41,8 +41,7 @@ public class NotificationController {
 
         constructedNotif.setContent(c);
 
-        NotifService.addNotification(constructedNotif);
-        return "Notification Has been Constructed";
+        return NotifService.addNotification(constructedNotif);
     }
 
 }

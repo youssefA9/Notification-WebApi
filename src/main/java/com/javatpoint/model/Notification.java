@@ -26,7 +26,6 @@ public class Notification {
         this.Content = template.getContent();
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
