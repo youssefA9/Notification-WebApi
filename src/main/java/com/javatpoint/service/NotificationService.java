@@ -37,32 +37,13 @@ public class NotificationService {
     }
 
     public void addNotification(Notification Notif) {
-        System.out.print("Channel:");
-        System.out.println(Notif.getChannel());
         if (Notif.getChannel().equalsIgnoreCase("sms")) {
-        //    addSMS(Notif);
+            addSMS(Notif);
         } else if (Notif.getChannel().equalsIgnoreCase("email")) {
-            //addEmail(Notif);
+            addEmail(Notif);
         }
-       // NotifRepository.save(Notif);
+        NotifRepository.save(Notif);
 
-        List<Notification> temp1 = new ArrayList<>();
-        List<Notification> temp2 = new ArrayList<>();
-        System.out.println("------------------------------------------");
-        smsRepository.findAll().forEach(temp -> temp1.add(temp));
-        for (int i = 0; i < temp1.size(); i++) {
-            System.out.println(temp1.get(i).getId());
-            System.out.println(temp1.get(i).getContent());
-            System.out.println(temp1.get(i).getChannel());
-        }
-        System.out.println("Email::::");
-        temp1.clear();
-        emailRepository.findAll().forEach(tempi -> temp2.add(tempi));
-        for (int i = 0; i < temp2.size(); i++) {
-            System.out.println(temp2.get(i).getId());
-            System.out.println(temp2.get(i).getContent());
-            System.out.println(temp2.get(i).getChannel());
-        }
     }
 
 }
