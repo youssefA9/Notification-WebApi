@@ -1,9 +1,9 @@
 package com.javatpoint.service;
 
 import com.javatpoint.model.Notification;
-import com.javatpoint.model.Template;
+import com.javatpoint.repository.EmailRepository;
 import com.javatpoint.repository.NotificationsRepository;
-import org.aspectj.weaver.ast.Not;
+import com.javatpoint.repository.SMSRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,8 @@ import java.util.List;
 public class NotificationService {
     @Autowired
     NotificationsRepository NotifRepository;
-
+    SMSRepository sms;
+    EmailRepository email;
     public List<Notification> getAllNotifications() {
         List<Notification> Notifications = new ArrayList<Notification>();
         NotifRepository.findAll().forEach(temp -> Notifications.add(temp));
@@ -22,6 +23,12 @@ public class NotificationService {
     }
 
     public void addNotification(Notification Notif) {
+        //sms is true
+        if(Notif.getChannel()){ sms.save(Notif); }
+
+        else{email.save(Notif);}
+
+
         NotifRepository.save(Notif);
     }
 
