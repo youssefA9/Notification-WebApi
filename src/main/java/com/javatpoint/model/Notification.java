@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table
 public class Notification {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column
@@ -14,18 +14,16 @@ public class Notification {
     @Column
     private String Content;
     @Column
-    private String channel; //sms is true;
+    private String Channel;
 
     public Notification() {
         this.Subject = null;
         this.Content = null;
-        this.channel = null;
     }
 
     public Notification(Template template) {
         this.Subject = template.getSubject();
         this.Content = template.getContent();
-
     }
 
 
@@ -45,8 +43,6 @@ public class Notification {
         Content = content;
     }
 
-    public void setChannel(String Channel) { channel = Channel; }
-
     public String getContent() {
         return Content;
     }
@@ -55,8 +51,11 @@ public class Notification {
         return Subject;
     }
 
-    public String  getChannel() {
-        return channel;
+    public String getChannel() {
+        return Channel;
     }
 
+    public void setChannel(String channel) {
+        Channel = channel;
+    }
 }

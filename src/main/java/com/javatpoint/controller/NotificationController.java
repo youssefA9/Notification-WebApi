@@ -23,11 +23,11 @@ public class NotificationController {
         return NotifService.getAllNotifications();
     }
 
-    @PostMapping("/notification/constr/{id}")
-    private String constructNotification(@PathVariable("id") int id, @RequestBody stringWrapper placeHolders) {
+    @PostMapping("/notification/constr/{id}/{channel}")
+    private String constructNotification(@PathVariable("id") int id, @PathVariable("channel") String channel, @RequestBody stringWrapper placeHolders) {
 
         Notification constructedNotif = new Notification(TemplateServ.readTemplate(id));
-
+        constructedNotif.setChannel(channel);
         int z = 0;
         String c = constructedNotif.getContent();
         for (int i = 0; i < c.length(); i++) {

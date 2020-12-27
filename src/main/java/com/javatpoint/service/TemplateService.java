@@ -29,6 +29,7 @@ public class TemplateService {
     }
 
     public void deleteTemplate(int id) {
+
         TemplatesRepository.deleteById(id);
     }
 

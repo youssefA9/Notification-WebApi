@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table
 public class Template {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column

@@ -37,7 +37,7 @@ public class TemplateController {
     @PostMapping("/templates/add")
     private String addTemplate(@RequestBody Template template) {
         TemplateService.addTemplate(template);
-        return template.getSubject();
+        return "Template Has Been Created";
     }
 
     @PutMapping("/templates/update")
