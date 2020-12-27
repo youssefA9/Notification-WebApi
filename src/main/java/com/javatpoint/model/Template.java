@@ -1,14 +1,12 @@
 package com.javatpoint.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class Template {
     @Id
+    @GeneratedValue
     @Column
     private int id;
     @Column
