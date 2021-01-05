@@ -4,7 +4,9 @@ import com.javatpoint.model.Notification;
 import com.javatpoint.model.SMS;
 import com.javatpoint.repository.SMSRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SMSService implements ChannelService {
 
     @Autowired

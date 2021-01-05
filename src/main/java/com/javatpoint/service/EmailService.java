@@ -4,7 +4,9 @@ import com.javatpoint.model.Email;
 import com.javatpoint.model.Notification;
 import com.javatpoint.repository.EmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmailService implements ChannelService {
     @Autowired
     EmailRepository emailRepository;

@@ -19,7 +19,9 @@ import java.util.List;
 public class NotificationService {
     @Autowired
     NotificationsRepository NotifRepository;
-    ChannelService channel;
+
+    @Autowired
+    List<ChannelService> channel;
 
     public List<Notification> getAllNotifications() {
         List<Notification> Notifications = new ArrayList<Notification>();
@@ -29,12 +31,10 @@ public class NotificationService {
 
     public String addNotification(Notification Notif) {
         NotifRepository.save(Notif);
-        if (Notif.getChannel().equalsIgnoreCase("sms")) {
-            channel = new SMSService();
-            return "Notification Has Been Constructed" + "\n" + channel.add(Notif);
-        } else if (Notif.getChannel().equalsIgnoreCase("email")) {
-            channel = new EmailService();
-            return "Notification Has Been Constructed" + "\n" + channel.add(Notif);
+        if (Notif.getChannel().equalsIgnoreCase("email")) {
+            return "Notification Has Been Constructed" + "\n" + channel.get(0).add(Notif);
+        } else if (Notif.getChannel().equalsIgnoreCase("sms")) {
+            return "Notification Has Been Constructed" + "\n" + channel.get(1).add(Notif);
         } else {
             return "Notification Has been Constructed But hadn't been add to any queue";
         }
