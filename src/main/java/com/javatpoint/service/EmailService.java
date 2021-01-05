@@ -29,17 +29,23 @@ public class EmailService implements ChannelService {
 
     public String dequeue() {
         String temp = view();
-        emailRepository.deleteById(1);
+        if (emailRepository.existsById(1)) {
+            emailRepository.deleteById(1);
+        }
         return temp;
     }
 
     public String view() {
-        Email temp = emailRepository.findById(1).get();
-        return ("==================================================\n" +
-                "--------------------------------------------------\n" +
-                "Subject: " + temp.getSubject() +
-                "\n--------------------------------------------------\n" +
-                temp.getContent() +
-                "\n==================================================\n");
+        if (!emailRepository.existsById(1)) {
+            return "empty!";
+        } else {
+            Email temp = emailRepository.findById(1).get();
+            return ("==================================================\n" +
+                    "--------------------------------------------------\n" +
+                    "Subject: " + temp.getSubject() +
+                    "\n--------------------------------------------------\n" +
+                    temp.getContent() +
+                    "\n==================================================\n");
+        }
     }
 }

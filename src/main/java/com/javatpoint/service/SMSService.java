@@ -33,14 +33,20 @@ public class SMSService implements ChannelService {
 
     public String dequeue() {
         String temp = view();
-        smsRepository.deleteById(1);
+        if (smsRepository.existsById(1)) {
+            smsRepository.deleteById(1);
+        }
         return temp;
     }
 
     public String view() {
-        SMS temp = smsRepository.findById(1).get();
-        return ("==================================================\n" +
-                temp.getContent() +
-                "\n==================================================\n");
+        if (!smsRepository.existsById(1)) {
+            return "empty!";
+        } else {
+            SMS temp = smsRepository.findById(1).get();
+            return ("==================================================\n" +
+                    temp.getContent() +
+                    "\n==================================================\n");
+        }
     }
 }
