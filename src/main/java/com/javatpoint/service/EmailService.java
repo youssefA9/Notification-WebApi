@@ -22,4 +22,24 @@ public class EmailService implements ChannelService {
         emailRepository.save(temp);
         return "Email Notification Has been added to queue";
     }
+
+    public void remove(int id) {
+        emailRepository.deleteById(id);
+    }
+
+    public String dequeue() {
+        String temp = view();
+        emailRepository.deleteById(1);
+        return temp;
+    }
+
+    public String view() {
+        Email temp = emailRepository.findById(1).get();
+        return ("==================================================\n" +
+                "--------------------------------------------------\n" +
+                "Subject: " + temp.getSubject() +
+                "\n--------------------------------------------------\n" +
+                temp.getContent() +
+                "\n==================================================\n");
+    }
 }

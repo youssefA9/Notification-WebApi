@@ -39,15 +39,4 @@ public class NotificationService {
             return "Notification Has been Constructed But hadn't been add to any queue";
         }
     }
-
-    public void dequeue(Notification Notif) {
-        NotifRepository.delete(Notif);
-    }
-    public void dequeueAll() {
-        List<Notification> AllNotifications = getAllNotifications();
-        for (int i = 0; i < AllNotifications.size(); i++) {
-            System.out.println(AllNotifications.get(i).getSubject() + " Notification has been sent by " + AllNotifications.get(i).getChannel() + " Method.");
-            dequeue(AllNotifications.get(i));
-        }
-    }
 }
