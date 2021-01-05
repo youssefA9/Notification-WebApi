@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class dequeuing {
+public class Dequeue {
     @Autowired
     NotificationService NotifService;
-    List<Notification> AllNotifications=NotifService.getAllNotifications();
+    List<Notification> AllNotifications = NotifService.getAllNotifications();
 
-    public void dequeueAll(){
-        for(int i=0;i<AllNotifications.size();i++){
-            System.out.println(AllNotifications.get(i).getSubject()+" Notification has been sent by "+AllNotifications.get(i).getChannel()+" Method.");
+    public void dequeueAll() {
+        for (int i = 0; i < AllNotifications.size(); i++) {
+            System.out.println(AllNotifications.get(i).getSubject() + " Notification has been sent by " + AllNotifications.get(i).getChannel() + " Method.");
             NotifService.dequeue(AllNotifications.get(i));
         }
     }

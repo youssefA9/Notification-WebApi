@@ -5,10 +5,13 @@ import com.javatpoint.model.Notification;
 import com.javatpoint.repository.EmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class EmailService implements ChannelService{
+public class EmailService implements ChannelService {
     @Autowired
     EmailRepository emailRepository;
-    public EmailService(){}
+
+    public EmailService() {
+    }
+
     @Override
     public String add(Notification Notif) {
         Email temp = new Email();

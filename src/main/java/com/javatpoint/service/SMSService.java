@@ -5,12 +5,13 @@ import com.javatpoint.model.SMS;
 import com.javatpoint.repository.SMSRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class SmsService implements ChannelService{
+public class SMSService implements ChannelService {
 
     @Autowired
     SMSRepository smsRepository;
 
-    public SmsService(){}
+    public SMSService() {
+    }
 
     @Override
     public String add(Notification Notif) {

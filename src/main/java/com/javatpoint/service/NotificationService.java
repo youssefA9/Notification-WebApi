@@ -30,16 +30,17 @@ public class NotificationService {
     public String addNotification(Notification Notif) {
         NotifRepository.save(Notif);
         if (Notif.getChannel().equalsIgnoreCase("sms")) {
-            channel=new SmsService();
+            channel = new SMSService();
             return "Notification Has Been Constructed" + "\n" + channel.add(Notif);
         } else if (Notif.getChannel().equalsIgnoreCase("email")) {
-            channel=new EmailService();
+            channel = new EmailService();
             return "Notification Has Been Constructed" + "\n" + channel.add(Notif);
         } else {
             return "Notification Has been Constructed But hadn't been add to any queue";
         }
     }
-    public void dequeue(Notification Notif){
+
+    public void dequeue(Notification Notif) {
         NotifRepository.delete(Notif);
     }
 }
