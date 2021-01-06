@@ -19,10 +19,9 @@ import java.util.List;
 public class NotificationService {
     @Autowired
     NotificationsRepository NotifRepository;
+
     @Autowired
-    SMSRepository smsRepository;
-    @Autowired
-    EmailRepository emailRepository;
+    List<ChannelService> channel;
 
     public List<Notification> getAllNotifications() {
         List<Notification> Notifications = new ArrayList<Notification>();
@@ -30,28 +29,12 @@ public class NotificationService {
         return Notifications;
     }
 
-    public String addSMS(Notification Notif) {
-        SMS temp = new SMS();
-        temp.setSubject(Notif.getSubject());
-        temp.setContent(Notif.getContent());
-        smsRepository.save(temp);
-        return "SMS Notification Has been added to queue";
-    }
-
-    public String addEmail(Notification Notif) {
-        Email temp = new Email();
-        temp.setSubject(Notif.getSubject());
-        temp.setContent(Notif.getContent());
-        emailRepository.save(temp);
-        return "Email Notification Has been added to queue";
-    }
-
     public String addNotification(Notification Notif) {
         NotifRepository.save(Notif);
-        if (Notif.getChannel().equalsIgnoreCase("sms")) {
-            return "Notification Has Been Constructed" + "\n" + addSMS(Notif);
-        } else if (Notif.getChannel().equalsIgnoreCase("email")) {
-            return "Notification Has Been Constructed" + "\n" + addEmail(Notif);
+        if (Notif.getChannel().equalsIgnoreCase("email")) {
+            return "Notification Has Been Constructed" + "\n" + channel.get(0).add(Notif);
+        } else if (Notif.getChannel().equalsIgnoreCase("sms")) {
+            return "Notification Has Been Constructed" + "\n" + channel.get(1).add(Notif);
         } else {
             return "Notification Has been Constructed But hadn't been add to any queue";
         }

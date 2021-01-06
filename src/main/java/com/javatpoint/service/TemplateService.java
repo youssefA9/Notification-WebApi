@@ -25,15 +25,30 @@ public class TemplateService {
     }
 
     public void addTemplate(Template Template) {
+        Template.setId(999999999);
         TemplatesRepository.save(Template);
+        idCalibration();
     }
 
     public void deleteTemplate(int id) {
-
         TemplatesRepository.deleteById(id);
+        idCalibration();
     }
 
     public void updateTemplate(Template newTemplate) {
         TemplatesRepository.save(newTemplate);
     }
+
+    public void idCalibration() {
+        List<Template> Templates = getAllTemplates();
+        TemplatesRepository.deleteAll();
+        Template temp;
+        int min = 1;
+        for (int i = 0; i < Templates.size(); i++) {
+            temp = new Template(Templates.get(i), min);
+            TemplatesRepository.save(temp);
+            min++;
+        }
+    }
+
 }

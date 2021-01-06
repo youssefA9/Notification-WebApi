@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table
 public class Template {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column
@@ -17,6 +16,17 @@ public class Template {
     private String Language;
     @Column
     private int NumOfPlaceholder;
+
+    public Template() {
+    }
+
+    public Template(Template template, int id) {
+        this.id = id;
+        this.Subject = template.getSubject();
+        this.Content = template.getContent();
+        this.NumOfPlaceholder = template.getNumOfPlaceholder();
+        this.Language = template.getLanguage();
+    }
 
     public void setNumOfPlaceholder(int n) {
         this.NumOfPlaceholder = n;

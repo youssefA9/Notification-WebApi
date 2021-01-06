@@ -7,13 +7,21 @@ import javax.persistence.*;
 public class Email {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column
     private String Subject;
     @Column
     private String Content;
+
+    public Email() {
+    }
+
+    public Email(Email email, int id) {
+        this.id = id;
+        this.Subject = email.getSubject();
+        this.Content = email.getContent();
+    }
 
     public void setId(int id) {
         this.id = id;
