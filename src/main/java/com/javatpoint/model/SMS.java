@@ -7,13 +7,21 @@ import javax.persistence.*;
 public class SMS {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column
     private String Subject;
     @Column
     private String Content;
+
+    public SMS() {
+    }
+
+    public SMS(SMS sms, int id) {
+        this.id = id;
+        this.Subject = sms.getSubject();
+        this.Content = sms.getContent();
+    }
 
     public void setId(int id) {
         this.id = id;
