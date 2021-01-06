@@ -23,25 +23,30 @@ public class NotificationController {
         return NotifService.getAllNotifications();
     }
 
-    @PostMapping("/notification/constr/{id}/{channel}")
-    private String constructNotification(@PathVariable("id") int id, @PathVariable("channel") String channel, @RequestBody stringWrapper placeHolders) {
+    @PostMapping("/notification/{channel}")
+    private String constructNotification(@PathVariable("channel") String channel, @RequestBody stringWrapper placeHolders) {
 
-        Notification constructedNotif = new Notification(TemplateServ.readTemplate(id));
-        constructedNotif.setChannel(channel);
-        int z = 0;
-        String c = constructedNotif.getContent();
-        for (int i = 0; i < c.length(); i++) {
-            if (c.charAt(i) == '#') {
-                String s = c.substring(0, i);
-                c = c.substring(i + 1, c.length());
-                c = s + placeHolders.str.get(z) + c;
-                z++;
+        String subject = placeHolders.str.get(0);
+        Notification constructedNotif = new Notification(TemplateServ.readTemplate(subject, placeHolders.str.size() - 1));
+        if (constructedNotif.getSubject() != null) {
+            constructedNotif.setChannel(channel);
+            int z = 1;
+            String c = constructedNotif.getContent();
+            for (int i = 0; i < c.length(); i++) {
+                if (c.charAt(i) == '#') {
+                    String s = c.substring(0, i);
+                    c = c.substring(i + 1, c.length());
+                    c = s + placeHolders.str.get(z) + c;
+                    z++;
+                }
             }
+
+            constructedNotif.setContent(c);
+
+            return NotifService.addNotification(constructedNotif);
+        } else {
+            return "Template with such subject and number of place holders don't exists";
         }
-
-        constructedNotif.setContent(c);
-
-        return NotifService.addNotification(constructedNotif);
     }
 
 }

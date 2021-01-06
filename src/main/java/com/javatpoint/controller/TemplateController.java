@@ -24,9 +24,9 @@ public class TemplateController {
         return TemplateService.getAllTemplates();
     }
 
-    @GetMapping("/templates/read/{id}")
-    private Template readTemplate(@PathVariable("id") int id) {
-        return TemplateService.readTemplate(id);
+    @GetMapping("/templates/read/{subject}")
+    private Template readTemplate(@PathVariable("subject") String subject) {
+        return TemplateService.readTemplate(subject, 1);
     }
 
     @DeleteMapping("/templates/delete/{id}")
