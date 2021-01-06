@@ -22,8 +22,12 @@ public class Notification {
     }
 
     public Notification(Template template) {
-        this.Subject = template.getSubject();
-        this.Content = template.getContent();
+        if (template != null) {
+            this.Subject = template.getSubject();
+            this.Content = template.getContent();
+        } else {
+            this.Subject = null;
+        }
     }
 
     public void setId(int id) {

@@ -4,6 +4,7 @@ import com.javatpoint.model.stringWrapper;
 import com.javatpoint.service.QueueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +17,14 @@ public class QueueController {
     @Autowired
     QueueService Queue;
 
-    @GetMapping("/dequeue")
-    private List<String> dequeueNotification(@RequestBody stringWrapper inputs) {
+    @GetMapping("/dequeue/{channel}/{count}")
+    private List<String> dequeueNotification(@PathVariable("channel") String channel, @PathVariable("count") String count) {
+
+
         List<String> templist = new ArrayList<>();
         String temp = "";
-        if (inputs.str.get(0).equalsIgnoreCase("email")) {
-            if (inputs.str.get(1).equalsIgnoreCase("all")) {
+        if (channel.equalsIgnoreCase("email")) {
+            if (count.equalsIgnoreCase("all")) {
                 while (true) {
                     temp = dequeueEmail();
                     if (temp.equalsIgnoreCase("empty!")) {
@@ -31,7 +34,7 @@ public class QueueController {
                     }
                 }
             } else {
-                for (int i = 0; i < Integer.valueOf(inputs.str.get(1)); i++) {
+                for (int i = 0; i < Integer.valueOf(count); i++) {
                     temp = dequeueEmail();
                     if (temp.equalsIgnoreCase("empty!")) {
                         break;
@@ -40,8 +43,8 @@ public class QueueController {
                     }
                 }
             }
-        } else if (inputs.str.get(0).equalsIgnoreCase("sms")) {
-            if (inputs.str.get(1).equalsIgnoreCase("all")) {
+        } else if (channel.equalsIgnoreCase("sms")) {
+            if (count.equalsIgnoreCase("all")) {
                 while (true) {
                     temp = dequeueSMS();
                     if (temp.equalsIgnoreCase("empty!")) {
@@ -51,7 +54,7 @@ public class QueueController {
                     }
                 }
             } else {
-                for (int i = 0; i < Integer.valueOf(inputs.str.get(1)); i++) {
+                for (int i = 0; i < Integer.valueOf(count); i++) {
                     temp = dequeueSMS();
                     if (temp.equalsIgnoreCase("empty!")) {
                         break;

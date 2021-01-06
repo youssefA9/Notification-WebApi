@@ -20,12 +20,27 @@ public class TemplateService {
         return Templates;
     }
 
-    public Template readTemplate(int id) {
-        return TemplatesRepository.findById(id).get();
+    public Template readTemplate(String subject, int numOfPlaceHolders) {
+        List<Template> Templates = getAllTemplates();
+        int id = 0;
+        for (int i = 0; i < Templates.size(); i++) {
+            if (Templates.get(i).getSubject().equalsIgnoreCase(subject)) {
+                if (Templates.get(i).getNumOfPlaceholder() == numOfPlaceHolders) {
+                    id = i + 1;
+                    break;
+                }
+            }
+        }
+        if (id != 0) {
+            return TemplatesRepository.findById(id).get();
+        } else {
+            return null;
+        }
     }
 
     public void addTemplate(Template Template) {
         Template.setId(999999999);
+        Template.setNumOfPlaceholder(checkNumOfPlaceHolder(Template.getContent()));
         TemplatesRepository.save(Template);
         idCalibration();
     }
@@ -37,6 +52,16 @@ public class TemplateService {
 
     public void updateTemplate(Template newTemplate) {
         TemplatesRepository.save(newTemplate);
+    }
+
+    public int checkNumOfPlaceHolder(String c) {
+        int count = 0;
+        for (int i = 0; i < c.length(); i++) {
+            if (c.charAt(i) == '#') {
+                count++;
+            }
+        }
+        return count;
     }
 
     public void idCalibration() {
