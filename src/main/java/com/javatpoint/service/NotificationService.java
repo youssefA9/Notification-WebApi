@@ -30,12 +30,18 @@ public class NotificationService {
     }
 
     public String addNotification(Notification Notif) {
-        NotifRepository.save(Notif);
+
         if (Notif.getChannel().equalsIgnoreCase("email")) {
+            Notif.setStatus(true);
+            NotifRepository.save(Notif);
             return "Notification Has Been Constructed" + "\n" + channel.get(0).add(Notif);
         } else if (Notif.getChannel().equalsIgnoreCase("sms")) {
+            Notif.setStatus(true);
+            NotifRepository.save(Notif);
             return "Notification Has Been Constructed" + "\n" + channel.get(1).add(Notif);
         } else {
+            Notif.setStatus(false);
+            NotifRepository.save(Notif);
             return "Notification Has been Constructed But hadn't been add to any queue";
         }
     }
