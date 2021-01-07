@@ -20,7 +20,6 @@ public class QueueController {
     @GetMapping("/dequeue/{channel}/{count}")
     private List<String> dequeueNotification(@PathVariable("channel") String channel, @PathVariable("count") String count) {
 
-
         List<String> templist = new ArrayList<>();
         String temp = "";
         if (channel.equalsIgnoreCase("email")) {
