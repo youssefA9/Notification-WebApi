@@ -1,6 +1,6 @@
 package com.javatpoint.service;
 
-import com.javatpoint.model.Email;
+
 import com.javatpoint.model.Notification;
 import com.javatpoint.model.SMS;
 import com.javatpoint.repository.SMSRepository;
