@@ -15,6 +15,8 @@ public class Notification {
     private String Content;
     @Column
     private String Channel;
+    @Column
+    private Boolean Status;
 
     public Notification() {
         this.Subject = null;
@@ -40,6 +42,14 @@ public class Notification {
 
     public void setSubject(String subject) {
         this.Subject = subject;
+    }
+
+    public boolean getStatus() {
+        return this.Status;
+    }
+
+    public void setStatus(boolean state) {
+        this.Status = state;
     }
 
     public void setContent(String content) {
