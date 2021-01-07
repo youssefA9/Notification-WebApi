@@ -1,8 +1,6 @@
 package com.javatpoint.controller;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.javatpoint.model.Notification;
-import com.javatpoint.model.Template;
 import com.javatpoint.model.stringWrapper;
 import com.javatpoint.service.NotificationService;
 import com.javatpoint.service.TemplateService;
